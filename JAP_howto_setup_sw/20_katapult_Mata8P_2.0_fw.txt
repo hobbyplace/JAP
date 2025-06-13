@@ -1,0 +1,41 @@
+download katapult
+https://github.com/Arksine/katapult
+
+cd ~/katapult/
+
+make menuconfig
+
+Micro-controller Architecture (STMicroelectronics STM32)  --->
+Processor model (STM32H723)  --->
+Build katapult deployment application (Do not build)  --->
+Clock Reference (25 MHz crystal)  --->
+CAN bus interface (CAN bus (on PD0/PD1)) --->
+Application start offset (8KiB offset)  --->
+
+(1000000) CAN bus speed
+() GPIO pins to set on bootloader entry
+[*] Support bootloader entry on rapid double click of reset button
+[ ] Enable bootloader entry on button (or gpio) state
+[ ] Enable Status LED
+
+make clean
+make
+
+ON EBB CAN V1.1
+DISCONECT MAIN POWER !!!!
+connect power jumper 
+connect USB
+Press boot and reset buttons to enter DFU mode
+
+LINUX
+lsusb should give you:
+Bus 001 Device 008: ID 0483:df11 STMicroelectronics STM Device in DFU Mode
+
+sudo dfu-util -a 0 -D ~/katapult/out/katapult.bin --dfuse-address 0x08000000:force:leave -d 0483:df11
+
+reboot toolhead
+
+scan for MCU UUID runing klipper
+~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0
+Found canbus_uuid=UUID, Application: Klipper
+

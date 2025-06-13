@@ -1,0 +1,31 @@
+using systemd (new)
+
+sudo nano /etc/systemd/network/80-can.network
+
+[Match]
+Name=can*
+
+[Link]
+RequiredForOnline=no
+
+[CAN]
+RestartSec=500ms
+BitRate=1000000
+
+
+sudo nano  /etc/systemd/system/can-up.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ifconfig can0 txqueuelen 128
+
+[Install]
+WantedBy=sys-subsystem-net-devices-can0.device
+
+sudo systemctl enable systemd-networkd
+sudo systemctl enable can-up.service
+sudo systemctl start systemd-networkd
+
+verification
+journalctl -b
+ifconfig

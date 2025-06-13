@@ -1,0 +1,12 @@
+check Probe
+PROBE
+PROBE_ACCURACY
+PROBE_CALIBRATE
+use TESTZ Z=+0.1 or TESTZ Z=-0.1
+
+when happy ACCEPT and SAVE_CONFIG
+
+to compensate for thermal expansion can be added in the start macro
+SET_GCODE_OFFSET Z=+.010
+
+ENDSTOP_PHASE_CALIBRATE STEPPER=stepper_z

@@ -1,0 +1,11 @@
+STEPPER_BUZZ STEPPER=stepper_x
+STEPPER_BUZZ STEPPER=stepper_y
+STEPPER_BUZZ STEPPER=stepper_z
+
+
+HOME x
+G28 X
+
+HOME y
+G28 y
+

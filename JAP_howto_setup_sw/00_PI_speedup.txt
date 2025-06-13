@@ -1,0 +1,14 @@
+edit /boot/firmware/cmdline.txt
+
+remove 
+console=tty
+Make the kernel output less verbose 
+add "quiet" to the end of the file /boot/cmdline.txt
+
+edit /boot/firmware/config.txt
+
+add
+[all]
+gpu_mem=16mb
+disable_splash=1
+boot_delay=0

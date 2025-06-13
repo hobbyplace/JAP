@@ -1,0 +1,17 @@
+edit printer.cfg
+[force_move]
+enable_force_move: true
+#   Set to true to enable FORCE_MOVE and SET_KINEMATIC_POSITION
+#   extended G-Code commands. The default is false. 
+
+in console
+G28 X Y
+G0 X160 Y160
+SET_KINEMATIC_POSITION Z=<value>
+BEACON_CALIBRATE
+TESTZ Z=-0.01
+ACCEPT
+SAVE_CONFIG
+
+set offset and apply with 
+Z_OFFSET_APPLY_PROBE
